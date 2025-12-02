@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Alexandre</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Menu de Navegação -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">
+                <h1><span>Alexandre</span></h1>
+            </div>
+            <ul class="nav-menu">
+                <li><a href="#sobre">Sobre Mim</a></li>
+                <li><a href="#formacao">Formação</a></li>
+                <li><a href="#portfolio">Portfólio</a></li>
+                <li><a href="#contato">Contato</a></li>
+            </ul>
+            <button id="theme-toggle" aria-label="Alternar tema">
+                <i class="fas fa-moon"></i>
+            </button>
+            <div class="hamburger" id="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seção Hero/Banner -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Olá, eu sou <span class="highlight">Alexandre</span></h1>
+            <p>Desenvolvedor Web & Estudante de Programação</p>
+            <a href="#portfolio" class="btn">Ver Meus Projetos</a>
+        </div>
+    </section>
+
+    <!-- Seção Sobre Mim -->
+    <section id="sobre" class="section">
+        <div class="container">
+            <h2 class="section-title">Sobre Mim</h2>
+            <div class="sobre-content">
+                <div class="sobre-texto">
+                    <h3>Quem sou eu?</h3>
+                    <p>Olá! Meu nome é Alexandre e sou apaixonado por tecnologia e desenvolvimento web. Atualmente estou cursando [Nome do Curso] e buscando oportunidades para aplicar e expandir meus conhecimentos.</p>
+                    
+                    <h3>Meus Hobbies</h3>
+                    <ul class="hobbies">
+                        <li><i class="fas fa-code"></i> Programação</li>
+                        <li><i class="fas fa-book"></i> Leitura</li>
+                        <li><i class="fas fa-music"></i> Música</li>
+                        <li><i class="fas fa-gamepad"></i> Games</li>
+                        <li><i class="fas fa-camera"></i> Fotografia</li>
+                    </ul>
+                    
+                    <h3>Habilidades</h3>
+                    <div class="skills">
+                        <div class="skill">
+                            <span>HTML5</span>
+                            <div class="skill-bar"><div class="skill-level" style="width: 90%"></div></div>
+                        </div>
+                        <div class="skill">
+                            <span>CSS3</span>
+                            <div class="skill-bar"><div class="skill-level" style="width: 85%"></div></div>
+                        </div>
+                        <div class="skill">
+                            <span>JavaScript</span>
+                            <div class="skill-bar"><div class="skill-level" style="width: 80%"></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="sobre-imagem">
+                    <!-- Substitua com sua foto ou ícone -->
+                    <div class="avatar">
+                        <i class="fas fa-user-circle"></i>
+                    </div>
+                    <div class="info-card">
+                        <p><i class="fas fa-birthday-cake"></i> Idade: [Sua Idade]</p>
+                        <p><i class="fas fa-map-marker-alt"></i> Cidade: [Sua Cidade]</p>
+                        <p><i class="fas fa-graduation-cap"></i> Status: Estudante</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Formação -->
+    <section id="formacao" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Formação</h2>
+            <div class="formacao-content">
+                <div class="formacao-item">
+                    <div class="formacao-icon">
+                        <i class="fas fa-graduation-cap"></i>
+                    </div>
+                    <div class="formacao-text">
+                        <h3>Formação Acadêmica</h3>
+                        <p><strong>[Nome do Curso]</strong></p>
+                        <p>[Nome da Instituição]</p>
+                        <p class="formacao-periodo">[Ano de Início] - [Ano de Término ou "Atual"]</p>
+                    </div>
+                </div>
+                
+                <div class="formacao-item">
+                    <div class="formacao-icon">
+                        <i class="fas fa-certificate"></i>
+                    </div>
+                    <div class="formacao-text">
+                        <h3>Cursos Complementares</h3>
+                        <ul>
+                            <li>Fundamentos da Programação Web - [Instituição]</li>
+                            <li>Desenvolvimento Front-end - [Plataforma]</li>
+                            <li>Git e GitHub - [Plataforma]</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="formacao-item">
+                    <div class="formacao-icon">
+                        <i class="fas fa-language"></i>
+                    </div>
+                    <div class="formacao-text">
+                        <h3>Idiomas</h3>
+                        <div class="idiomas">
+                            <div class="idioma">
+                                <span>Português</span>
+                                <div class="idioma-level">Nativo</div>
+                            </div>
+                            <div class="idioma">
+                                <span>Inglês</span>
+                                <div class="idioma-level">Intermediário</div>
+                            </div>
+                            <div class="idioma">
+                                <span>Espanhol</span>
+                                <div class="idioma-level">Básico</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Portfólio -->
+    <section id="portfolio" class="section">
+        <div class="container">
+            <h2 class="section-title">Portfólio</h2>
+            <p class="section-subtitle">Alguns dos meus projetos e trabalhos</p>
+            
+            <div class="portfolio-grid">
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <i class="fas fa-laptop-code"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Site Pessoal</h3>
+                        <p>Portfólio desenvolvido com HTML, CSS e JavaScript puro.</p>
+                        <a href="#" class="portfolio-link" target="_blank">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <i class="fas fa-calculator"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Calculadora Web</h3>
+                        <p>Calculadora funcional desenvolvida em JavaScript.</p>
+                        <a href="#" class="portfolio-link" target="_blank">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <i class="fas fa-gamepad"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>Jogo da Memória</h3>
+                        <p>Jogo interativo desenvolvido com JavaScript.</p>
+                        <a href="#" class="portfolio-link" target="_blank">Ver Projeto</a>
+                    </div>
+                </div>
+                
+                <div class="portfolio-item">
+                    <div class="portfolio-img">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="portfolio-content">
+                        <h3>To-Do List</h3>
+                        <p>Aplicativo de lista de tarefas com armazenamento local.</p>
+                        <a href="#" class="portfolio-link" target="_blank">Ver Projeto</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="portfolio-note">
+                <p><i class="fas fa-info-circle"></i> Estes são projetos acadêmicos desenvolvidos durante meus estudos.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção Contato -->
+    <section id="contato" class="section bg-light">
+        <div class="container">
+            <h2 class="section-title">Contato</h2>
+            <p class="section-subtitle">Entre em contato comigo!</p>
+            
+            <div class="contato-content">
+                <div class="contato-info">
+                    <h3>Informações de Contato</h3>
+                    <div class="info-item">
+                        <i class="fas fa-envelope"></i>
+                        <div>
+                            <h4>E-mail</h4>
+                            <p>seuemail@exemplo.com</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fas fa-phone"></i>
+                        <div>
+                            <h4>Telefone</h4>
+                            <p>(XX) XXXX-XXXX</p>
+                        </div>
+                    </div>
+                    <div class="info-item">
+                        <i class="fab fa-github"></i>
+                        <div>
+                            <h4>GitHub</h4>
+                            <p>github.com/seuusuario</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="contato-form">
+                    <h3>Envie uma Mensagem</h3>
+                    <form id="form-contato">
+                        <div class="form-group">
+                            <label for="nome">Nome *</label>
+                            <input type="text" id="nome" name="nome" required>
+                            <div class="error-message" id="nome-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email">E-mail *</label>
+                            <input type="email" id="email" name="email" required>
+                            <div class="error-message" id="email-error"></div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="mensagem">Mensagem *</label>
+                            <textarea id="mensagem" name="mensagem" rows="5" required></textarea>
+                            <div class="error-message" id="mensagem-error"></div>
+                        </div>
+                        
+                        <button type="submit" class="btn btn-submit">Enviar Mensagem</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal de Confirmação -->
+    <div id="modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <div class="modal-icon">
+                <i class="fas fa-check-circle"></i>
+            </div>
+            <h3>Mensagem Enviada!</h3>
+            <p>Sua mensagem foi enviada com sucesso. Entrarei em contato em breve!</p>
+            <button class="btn" id="modal-close">OK</button>
+        </div>
+    </div>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container">
+            <p>&copy; <span id="current-year"></span> Alexandre. Todos os direitos reservados.</p>
+            <p>Desenvolvido com HTML5, CSS3 e JavaScript puro</p>
+            <div class="social-links">
+                <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+                <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin"></i></a>
+                <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
