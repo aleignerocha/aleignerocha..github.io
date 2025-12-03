@@ -1,235 +1,198 @@
-// Comentário: Este arquivo contém toda a lógica JavaScript do portfólio
-
-// DOMContentLoaded garante que o código execute após o carregamento do HTML
+// Inicia tudo quando a página carrega
 document.addEventListener('DOMContentLoaded', function() {
-    // Elementos principais
-    const themeToggle = document.getElementById('theme-toggle');
-    const hamburger = document.getElementById('hamburger');
-    const navMenu = document.querySelector('.nav-menu');
-    const formContato = document.getElementById('form-contato');
-    const modal = document.getElementById('modal');
-    const closeModal = document.querySelector('.close-modal');
-    const modalCloseBtn = document.getElementById('modal-close');
-    const currentYear = document.getElementById('current-year');
-
-    // 1. TEMA CLARO/ESCURO
-    // Verifica se há preferência salva ou usa padrão do sistema
-    function initTheme() {
-        const savedTheme = localStorage.getItem('theme') || 
-                          (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+    
+    // Tema claro/escuro
+    const botaoTema = document.getElementById('theme-toggle');
+    
+    function configurarTema() {
+        const temaSalvo = localStorage.getItem('tema');
         
-        if (savedTheme === 'dark') {
+        if (temaSalvo === 'escuro') {
             document.body.classList.add('dark-mode');
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
-        } else {
+            botaoTema.innerHTML = '<i class="fas fa-sun"></i>';
+        } else if (temaSalvo === 'claro') {
             document.body.classList.remove('dark-mode');
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            botaoTema.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            // Se não tem preferência salva, verifica o sistema
+            if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+                document.body.classList.add('dark-mode');
+                botaoTema.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('tema', 'escuro');
+            } else {
+                botaoTema.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('tema', 'claro');
+            }
         }
     }
-
-    // Alterna entre temas
-    themeToggle.addEventListener('click', function() {
-        document.body.classList.toggle('dark-mode');
-        
+    
+    botaoTema.addEventListener('click', function() {
         if (document.body.classList.contains('dark-mode')) {
-            localStorage.setItem('theme', 'dark');
-            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+            document.body.classList.remove('dark-mode');
+            botaoTema.innerHTML = '<i class="fas fa-moon"></i>';
+            localStorage.setItem('tema', 'claro');
         } else {
-            localStorage.setItem('theme', 'light');
-            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+            document.body.classList.add('dark-mode');
+            botaoTema.innerHTML = '<i class="fas fa-sun"></i>';
+            localStorage.setItem('tema', 'escuro');
         }
     });
-
-    // 2. MENU RESPONSIVO
-    hamburger.addEventListener('click', function() {
-        hamburger.classList.toggle('active');
-        navMenu.classList.toggle('active');
+    
+    // Menu mobile
+    const menuHamburger = document.getElementById('hamburger');
+    const menuNav = document.querySelector('.nav-menu');
+    
+    menuHamburger.addEventListener('click', function() {
+        menuHamburger.classList.toggle('active');
+        menuNav.classList.toggle('active');
     });
-
-    // Fecha menu ao clicar em um link
-    document.querySelectorAll('.nav-menu a').forEach(link => {
+    
+    // Fecha menu quando clica em um link
+    document.querySelectorAll('.nav-menu a').forEach(function(link) {
         link.addEventListener('click', function() {
-            hamburger.classList.remove('active');
-            navMenu.classList.remove('active');
+            menuHamburger.classList.remove('active');
+            menuNav.classList.remove('active');
         });
     });
-
-    // 3. VALIDAÇÃO DO FORMULÁRIO DE CONTATO
-    function validarEmail(email) {
-        const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-        return regex.test(email);
-    }
-
-    function mostrarErro(elemento, mensagem) {
-        elemento.textContent = mensagem;
-        elemento.style.display = 'block';
-    }
-
-    function limparErro(elemento) {
-        elemento.textContent = '';
-        elemento.style.display = 'none';
-    }
-
-    // Validação em tempo real
-    const nomeInput = document.getElementById('nome');
-    const emailInput = document.getElementById('email');
-    const mensagemInput = document.getElementById('mensagem');
-    const nomeError = document.getElementById('nome-error');
-    const emailError = document.getElementById('email-error');
-    const mensagemError = document.getElementById('mensagem-error');
-
-    // Validação do nome
-    nomeInput.addEventListener('input', function() {
-        if (nomeInput.value.trim().length < 2) {
-            mostrarErro(nomeError, 'Nome deve ter pelo menos 2 caracteres');
-        } else {
-            limparErro(nomeError);
-        }
-    });
-
-    // Validação do email
-    emailInput.addEventListener('input', function() {
-        if (!validarEmail(emailInput.value)) {
-            mostrarErro(emailError, 'Digite um email válido');
-        } else {
-            limparErro(emailError);
-        }
-    });
-
-    // Validação da mensagem
-    mensagemInput.addEventListener('input', function() {
-        if (mensagemInput.value.trim().length < 10) {
-            mostrarErro(mensagemError, 'Mensagem deve ter pelo menos 10 caracteres');
-        } else {
-            limparErro(mensagemError);
-        }
-    });
-
-    // 4. ENVIO DO FORMULÁRIO (simulação)
-    formContato.addEventListener('submit', function(e) {
-        e.preventDefault(); // Previne envio real do formulário
+    
+    // Formulário de contato
+    const formulario = document.getElementById('form-contato');
+    
+    if (formulario) {
+        // Elementos do formulário
+        const campoNome = document.getElementById('nome');
+        const campoEmail = document.getElementById('email');
+        const campoMensagem = document.getElementById('mensagem');
+        const erroNome = document.getElementById('nome-error');
+        const erroEmail = document.getElementById('email-error');
+        const erroMensagem = document.getElementById('mensagem-error');
         
-        // Validação final antes do envio
-        let valido = true;
-        
-        if (nomeInput.value.trim().length < 2) {
-            mostrarErro(nomeError, 'Nome é obrigatório');
-            valido = false;
+        // Validação simples de email
+        function emailValido(email) {
+            return email.includes('@') && email.includes('.');
         }
         
-        if (!validarEmail(emailInput.value)) {
-            mostrarErro(emailError, 'Email é obrigatório e deve ser válido');
-            valido = false;
-        }
+        // Validação em tempo real
+        campoNome.addEventListener('blur', function() {
+            if (campoNome.value.trim().length < 2) {
+                erroNome.textContent = 'Nome precisa ter pelo menos 2 letras';
+            } else {
+                erroNome.textContent = '';
+            }
+        });
         
-        if (mensagemInput.value.trim().length < 10) {
-            mostrarErro(mensagemError, 'Mensagem é obrigatória');
-            valido = false;
-        }
+        campoEmail.addEventListener('blur', function() {
+            if (!emailValido(campoEmail.value)) {
+                erroEmail.textContent = 'Email precisa ser válido';
+            } else {
+                erroEmail.textContent = '';
+            }
+        });
         
-        // Se tudo estiver válido, simula o envio
-        if (valido) {
-            // Simulação de envio (aqui normalmente faria uma requisição AJAX)
-            console.log('Formulário enviado com sucesso!');
-            console.log('Nome:', nomeInput.value);
-            console.log('Email:', emailInput.value);
-            console.log('Mensagem:', mensagemInput.value);
+        campoMensagem.addEventListener('blur', function() {
+            if (campoMensagem.value.trim().length < 10) {
+                erroMensagem.textContent = 'Mensagem muito curta';
+            } else {
+                erroMensagem.textContent = '';
+            }
+        });
+        
+        // Envio do formulário
+        formulario.addEventListener('submit', function(e) {
+            e.preventDefault();
             
-            // Limpa o formulário
-            formContato.reset();
+            let tudoCerto = true;
             
-            // Esconde mensagens de erro
-            limparErro(nomeError);
-            limparErro(emailError);
-            limparErro(mensagemError);
+            // Valida nome
+            if (campoNome.value.trim().length < 2) {
+                erroNome.textContent = 'Nome precisa ter pelo menos 2 letras';
+                tudoCerto = false;
+            }
             
-            // Mostra modal de confirmação
-            modal.style.display = 'flex';
-        }
-    });
-
-    // 5. CONTROLE DO MODAL
-    closeModal.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
-
-    modalCloseBtn.addEventListener('click', function() {
-        modal.style.display = 'none';
-    });
-
-    // Fecha modal ao clicar fora dele
-    window.addEventListener('click', function(e) {
-        if (e.target === modal) {
+            // Valida email
+            if (!emailValido(campoEmail.value)) {
+                erroEmail.textContent = 'Email precisa ser válido';
+                tudoCerto = false;
+            }
+            
+            // Valida mensagem
+            if (campoMensagem.value.trim().length < 10) {
+                erroMensagem.textContent = 'Mensagem muito curta';
+                tudoCerto = false;
+            }
+            
+            // Se tudo estiver ok
+            if (tudoCerto) {
+                console.log('Dados do formulário:');
+                console.log('Nome: ' + campoNome.value);
+                console.log('Email: ' + campoEmail.value);
+                console.log('Mensagem: ' + campoMensagem.value);
+                
+                // Mostra mensagem de sucesso
+                const modal = document.getElementById('modal');
+                modal.style.display = 'flex';
+                
+                // Limpa o formulário
+                formulario.reset();
+            }
+        });
+    }
+    
+    // Modal de confirmação
+    const modal = document.getElementById('modal');
+    const fecharModal = document.querySelector('.close-modal');
+    const botaoModalOk = document.getElementById('modal-close');
+    
+    if (fecharModal && modal && botaoModalOk) {
+        fecharModal.addEventListener('click', function() {
             modal.style.display = 'none';
-        }
-    });
-
-    // 6. ATUALIZAÇÃO DO ANO NO RODAPÉ
-    if (currentYear) {
-        currentYear.textContent = new Date().getFullYear();
-    }
-
-    // 7. ANIMAÇÃO AO ROLAR A PÁGINA
-    function animacaoScroll() {
-        const elementos = document.querySelectorAll('.formacao-item, .portfolio-item');
+        });
         
-        elementos.forEach(elemento => {
-            const elementoTop = elemento.getBoundingClientRect().top;
-            const alturaTela = window.innerHeight;
-            
-            if (elementoTop < alturaTela * 0.8) {
-                elemento.style.opacity = '1';
-                elemento.style.transform = 'translateY(0)';
+        botaoModalOk.addEventListener('click', function() {
+            modal.style.display = 'none';
+        });
+        
+        window.addEventListener('click', function(e) {
+            if (e.target === modal) {
+                modal.style.display = 'none';
             }
         });
     }
-
-    // Inicializa elementos com opacidade 0
-    document.querySelectorAll('.formacao-item, .portfolio-item').forEach(item => {
-        item.style.opacity = '0';
-        item.style.transform = 'translateY(20px)';
-        item.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
-    });
-
-    // Adiciona evento de scroll
-    window.addEventListener('scroll', animacaoScroll);
     
-    // Executa uma vez ao carregar a página
-    animacaoScroll();
-
-    // 8. INICIALIZAÇÃO
-    function init() {
-        initTheme(); // Inicializa tema
-        console.log('Portfólio inicializado com sucesso!');
+    // Atualiza ano no rodapé
+    const anoRodape = document.getElementById('current-year');
+    if (anoRodape) {
+        const dataAtual = new Date();
+        anoRodape.textContent = dataAtual.getFullYear();
     }
-
-    init(); // Executa inicialização
-});
-
-// Comentário: Função para highlight do menu ativo (opcional)
-function highlightMenuAtivo() {
-    const sections = document.querySelectorAll('section[id]');
-    const navLinks = document.querySelectorAll('.nav-menu a');
     
+    // Animação simples ao rolar
     window.addEventListener('scroll', function() {
-        let scrollY = window.pageYOffset;
+        const itensFormacao = document.querySelectorAll('.formacao-item');
         
-        sections.forEach(section => {
-            const sectionHeight = section.offsetHeight;
-            const sectionTop = section.offsetTop - 100;
-            const sectionId = section.getAttribute('id');
+        itensFormacao.forEach(function(item) {
+            const posicao = item.getBoundingClientRect();
             
-            if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
+            // Se o item está visível na tela
+            if (posicao.top < window.innerHeight * 0.8) {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
             }
         });
     });
-}
-
-// Chama a função após o carregamento
-document.addEventListener('DOMContentLoaded', highlightMenuAtivo);
+    
+    // Inicia algumas animações
+    setTimeout(function() {
+        const itensFormacao = document.querySelectorAll('.formacao-item');
+        itensFormacao.forEach(function(item) {
+            item.style.transition = 'opacity 0.5s, transform 0.5s';
+        });
+    }, 100);
+    
+    // Inicializa
+    configurarTema();
+    
+    // Log simples no console
+    console.log('Site do Alexandre carregado!');
+    
+});
