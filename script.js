@@ -67,9 +67,10 @@ document.addEventListener('DOMContentLoaded', function() {
         const erroEmail = document.getElementById('email-error');
         const erroMensagem = document.getElementById('mensagem-error');
         
-        // Validação simples de email
+        // Validação melhorada de email
         function emailValido(email) {
-            return email.includes('@') && email.includes('.');
+            const regex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            return regex.test(email);
         }
         
         // Validação em tempo real
@@ -97,6 +98,19 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
+        // Limpa erros ao focar (OPCIONAL)
+        campoNome.addEventListener('focus', function() {
+            erroNome.textContent = '';
+        });
+        
+        campoEmail.addEventListener('focus', function() {
+            erroEmail.textContent = '';
+        });
+        
+        campoMensagem.addEventListener('focus', function() {
+            erroMensagem.textContent = '';
+        });
+        
         // Envio do formulário
         formulario.addEventListener('submit', function(e) {
             e.preventDefault();
@@ -105,19 +119,19 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Valida nome
             if (campoNome.value.trim().length < 2) {
-                erroNome.textContent = 'Nome precisa ter pelo menos 2 letras';
+                erroNome.textContent = 'Nome é obrigatório (mínimo 2 letras)';
                 tudoCerto = false;
             }
             
             // Valida email
             if (!emailValido(campoEmail.value)) {
-                erroEmail.textContent = 'Email precisa ser válido';
+                erroEmail.textContent = 'Email inválido';
                 tudoCerto = false;
             }
             
             // Valida mensagem
             if (campoMensagem.value.trim().length < 10) {
-                erroMensagem.textContent = 'Mensagem muito curta';
+                erroMensagem.textContent = 'Mensagem muito curta (mínimo 10 caracteres)';
                 tudoCerto = false;
             }
             
@@ -166,14 +180,25 @@ document.addEventListener('DOMContentLoaded', function() {
         anoRodape.textContent = dataAtual.getFullYear();
     }
     
-    // Animação simples ao rolar
+    // Animação simples ao rolar - ATUALIZADA COM PORTFÓLIO
     window.addEventListener('scroll', function() {
         const itensFormacao = document.querySelectorAll('.formacao-item');
+        const itensPortfolio = document.querySelectorAll('.portfolio-item');
         
+        // Anima itens de formação
         itensFormacao.forEach(function(item) {
             const posicao = item.getBoundingClientRect();
             
-            // Se o item está visível na tela
+            if (posicao.top < window.innerHeight * 0.8) {
+                item.style.opacity = '1';
+                item.style.transform = 'translateY(0)';
+            }
+        });
+        
+        // Anima itens do portfólio (NOVO)
+        itensPortfolio.forEach(function(item) {
+            const posicao = item.getBoundingClientRect();
+            
             if (posicao.top < window.innerHeight * 0.8) {
                 item.style.opacity = '1';
                 item.style.transform = 'translateY(0)';
@@ -181,18 +206,33 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    // Inicia algumas animações
+    // Inicia algumas animações - ATUALIZADA COM PORTFÓLIO
     setTimeout(function() {
         const itensFormacao = document.querySelectorAll('.formacao-item');
+        const itensPortfolio = document.querySelectorAll('.portfolio-item');
+        
+        // Configura animações para formação
         itensFormacao.forEach(function(item) {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
             item.style.transition = 'opacity 0.5s, transform 0.5s';
         });
+        
+        // Configura animações para portfólio (NOVO)
+        itensPortfolio.forEach(function(item) {
+            item.style.opacity = '0';
+            item.style.transform = 'translateY(20px)';
+            item.style.transition = 'opacity 0.5s, transform 0.5s';
+        });
+        
+        // Executa animação inicial
+        window.dispatchEvent(new Event('scroll'));
     }, 100);
     
     // Inicializa
     configurarTema();
     
     // Log simples no console
-    console.log('Site do Alexandre carregado!');
+    console.log('Site do Alexandre carregado com sucesso!');
     
 });
